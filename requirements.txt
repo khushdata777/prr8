@@ -1,7 +1,7 @@
-chromadb
+streamlit
 langchain
 langchain-community
-streamlit
+chromadb
 transformers
 huggingface_hub
 sentence-transformers
