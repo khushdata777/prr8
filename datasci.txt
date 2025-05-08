@@ -1,0 +1,20 @@
+Data science is the study of data that helps us derive useful insight for business decision making. Data Science is all about using tools, techniques, and creativity to uncover insights hidden within data. It combines math, computer science, and domain expertise to tackle real-world challenges in a variety of fields.
+
+Data Science processes the raw data and solve business problems and even make prediction about the future trend or requirement. For example, from the huge raw data of a company, data science can help answer following question:
+
+What do customer want?
+How can we improve our services?
+What will the upcoming trend in sales?
+How much stock they need for upcoming festival.
+
+In short, data science empowers the industries to make smarter, faster, and more informed decisions. In order to find patterns and achieve such insights, expertise in relevant domain is required. With expertise in Healthcare, a data scientists can predict patient risks and suggest personalized treatments.
+
+Data science involves these key steps:
+
+Data Collection: Gathering raw data from various sources, such as databases, sensors, or user interactions.
+Data Cleaning: Ensuring the data is accurate, complete, and ready for analysis.
+Data Analysis: Applying statistical and computational methods to identify patterns, trends, or relationships.
+Data Visualization: Creating charts, graphs, and dashboards to present findings clearly.
+Decision-Making: Using insights to inform strategies, create solutions, or predict outcomes.
+Increasing Demand of Data Science
+Data Science is most promising and high in-demand career path. Given the massive amount of data rapidly increasing in every industry, demand of data scientists is expected to grow further by 35% in 2025. Today’s data science is not limited to only analyzing data, or understanding past trends. Empowered with AI, ML and other advanced techniques, data science can solve real-word problems and train advance systems without human intervention.
