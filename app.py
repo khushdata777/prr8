@@ -38,7 +38,11 @@ if uploaded_file and user_question:
 
     # Embed the chunks using Hugging Face embeddings
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    vectorstore = Chroma.from_documents(chunks, embeddings)
+    import tempfile
+
+    persist_directory = tempfile.mkdtemp()
+    vectorstore = Chroma.from_documents(chunks, embeddings, persist_directory=persist_directory)
+
 
     # Set up the retriever
     retriever = vectorstore.as_retriever()
