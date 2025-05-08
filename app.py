@@ -39,10 +39,13 @@ if uploaded_file and question:
     chunks = text_splitter.split_documents(documents)
 
     # Use Hugging Face hosted embeddings (works with Streamlit Cloud)
-    embeddings = HuggingFaceHubEmbeddings(
-        repo_id="sentence-transformers/all-MiniLM-L6-v2",
-        huggingfacehub_api_token=HUGGINGFACEHUB_API_TOKEN
-    )
+    from langchain_huggingface import HuggingFaceEndpointEmbeddings
+
+    embeddings = HuggingFaceEndpointEmbeddings(
+    model="sentence-transformers/all-MiniLM-L6-v2",
+    huggingfacehub_api_token="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"
+     )
+
 
     # Create Chroma vector store in a temp directory
     persist_directory = tempfile.mkdtemp()
