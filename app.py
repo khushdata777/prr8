@@ -1,62 +1,50 @@
 import streamlit as st
-from langchain_community.document_loaders import PyPDFLoader, TextLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import Chroma
-from langchain.chains import RetrievalQA
-from langchain.llms import HuggingFaceHub
 import os
 import tempfile
 
-# Load Hugging Face API key from environment (set in Streamlit Cloud secrets)
+from langchain_community.document_loaders import PyPDFLoader, TextLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.embeddings import HuggingFaceHubEmbeddings
+from langchain.vectorstores import Chroma
+from langchain.llms import HuggingFaceHub
+from langchain.chains import RetrievalQA
+
+# Load API key from Streamlit Secrets
 HUGGINGFACEHUB_API_TOKEN = os.getenv("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")
 
-st.title("📄 PDF/Text Chatbot with Hugging Face")
+st.set_page_config(page_title="📄 PDF/Text Chatbot")
+st.title("📄 Chat with your PDF/Text using Hugging Face 🤗")
 
-# Upload a PDF or Text file
-uploaded_file = st.file_uploader("https://github.com/khushdata777/prr8/blob/main/datasci.txt", type=["pdf", "txt"])
-user_question = st.text_input("Ask a question about the document:")
+# Upload the file
+uploaded_file = st.file_uploader("Upload a PDF or TXT file", type=["pdf", "txt"])
+question = st.text_input("Ask a question about the file content:")
 
-if uploaded_file and user_question:
-    # Save uploaded file to a temporary file
+if uploaded_file and question:
+    # Save uploaded file temporarily
     suffix = ".pdf" if uploaded_file.name.endswith(".pdf") else ".txt"
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp_file:
         tmp_file.write(uploaded_file.read())
         file_path = tmp_file.name
 
-    # Load the file content using appropriate loader
+    # Load file with appropriate loader
     if suffix == ".pdf":
         loader = PyPDFLoader(file_path)
     else:
         loader = TextLoader(file_path)
-
+    
     documents = loader.load()
 
-    # Split content into chunks
-    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
-    chunks = splitter.split_documents(documents)
+    # Split documents into chunks
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    chunks = text_splitter.split_documents(documents)
 
-    # Embed the chunks using Hugging Face embeddings
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    import tempfile
-
-    persist_directory = tempfile.mkdtemp()
-    vectorstore = Chroma.from_documents(chunks, embeddings, persist_directory=persist_directory)
-
-
-    # Set up the retriever
-    retriever = vectorstore.as_retriever()
-
-    # Initialize the Hugging Face model (flan-t5-base, for example)
-    llm = HuggingFaceHub(
-        repo_id="google/flan-t5-base",
-        huggingfacehub_api_token=HUGGINGFACEHUB_API_TOKEN,
-        model_kwargs={"temperature": 0.5, "max_length": 256},
+    # Use Hugging Face hosted embeddings (works with Streamlit Cloud)
+    embeddings = HuggingFaceHubEmbeddings(
+        repo_id="sentence-transformers/all-MiniLM-L6-v2",
+        huggingfacehub_api_token=HUGGINGFACEHUB_API_TOKEN
     )
 
-    # Create the QA chain using the retriever and model
-    qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
-
-    # Get the answer to the user's question
-    answer = qa.run(user_question)
-    st.write("💬 Answer:", answer)
+    # Create Chroma vector store in a temp directory
+    persist_directory = tempfile.mkdtemp()
+    vectorstore = Chroma.from_documents(chunks, embeddings, persist_directory=persist_directory)
+    retriever = vectorstore.as_r_
