@@ -1,6 +1,7 @@
 streamlit
 langchain
 langchain-community
+langchain-huggingface
 chromadb
 transformers
 huggingface_hub
