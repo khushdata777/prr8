@@ -1,12 +1,10 @@
-streamlit
+chromadb
 langchain
 langchain-community
-chromadb==0.3.20  # Add specific chromadb version
+streamlit
 transformers
 huggingface_hub
-PyPDF2
 sentence-transformers
+PyPDF2
 PyMuPDF
-pinecone-client
-protobuf==4.23.0  # Add protobuf version to avoid conflicts
-
+protobuf==4.23.0
