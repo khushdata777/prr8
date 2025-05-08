@@ -9,12 +9,12 @@ import os
 import tempfile
 
 # Load Hugging Face API key from environment (set in Streamlit Cloud secrets)
-HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+HUGGINGFACEHUB_API_TOKEN = os.getenv("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")
 
 st.title("📄 PDF/Text Chatbot with Hugging Face")
 
 # Upload a PDF or Text file
-uploaded_file = st.file_uploader("Upload a PDF or TXT file", type=["pdf", "txt"])
+uploaded_file = st.file_uploader("https://github.com/khushdata777/prr8/blob/main/datasci.txt", type=["pdf", "txt"])
 user_question = st.text_input("Ask a question about the document:")
 
 if uploaded_file and user_question:
