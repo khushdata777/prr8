@@ -13,7 +13,7 @@ HUGGINGFACEHUB_API_TOKEN = os.getenv("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")
 
 # Streamlit UI
 st.title("📄 PDF/Text Chatbot using Hugging Face")
-uploaded_file = st.file_uploader("C:\Users\LENOVO\Desktop\PRO8MAY\datasci.txt", type=["pdf", "txt"])
+uploaded_file = st.file_uploader("datasci.txt", type=["pdf", "txt"])
 user_question = st.text_input("Ask a question about the document:")
 
 if uploaded_file and user_question:
