@@ -9,3 +9,4 @@ sentence-transformers
 PyPDF2
 PyMuPDF
 protobuf==4.23.0
+
